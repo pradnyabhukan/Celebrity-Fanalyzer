@@ -72,6 +72,19 @@
         <p v-else class="q-mt-md text-body1" v-html="post?.description"></p>
         <q-separator spaced="lg" />
         <div class="text-center">
+
+          <q-btn
+            color="blue"
+            flat
+            :icon="'img:/icons/edit.svg'"
+            :label="Edit"
+            rounded
+            size="0.75rem"
+            @click="editItem()"
+          >
+            <q-tooltip anchor="bottom middle" self="center middle">Edit</q-tooltip>
+          </q-btn>
+
           <q-btn
             color="green"
             :data-test="!likeStore._isLoading && likeStore.getLikes ? 'like-button' : ''"
@@ -242,6 +255,10 @@ async function share(socialNetwork) {
 
 async function subscribe() {
   await notificationStore.toggleSubscription(props.collectionName, props.post.id).catch((error) => errorStore.throwError(error))
+}
+
+function editItem() {
+  console.log("edit");
 }
 
 watchEffect(async () => {
